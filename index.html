@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Parabolic Antenna Calculator</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Parabolic Antenna Calculator">
+  <meta name="author" content="Anton Semchishen">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Parabolic Antenna Calculator</h1>
+    <h2>a Shiny app</h2>
+    <p>Anton Semchishen<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Purpose</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>With this app you can evaluate geometry of simple parabolic reflector for 
+various implementations:</p>
+
+<ul>
+<li>Increase signal strenghth of LTE/3G Modem</li>
+<li>Convert wi-fi antenna to be monodirectional</li>
+<li>Build long distance (100-1000m) wi-fi bridge</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Under the hood</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Shiny performs a very simple calculation based on square equiation</li>
+<li>Code as below</li>
+</ul>
+
+<pre><code class="r">    ## input parameters
+    x &lt;- input$dishsize
+    f &lt;- input$focus
+    ## empty data frame for plotting
+    df &lt;- data.frame(x=numeric(),y=numeric(), stringsAsFactors=FALSE)
+    ## evaluating parabola centered to 0
+    for (i in seq(-x/2, x/2, by=0.1)) {
+            y = i^2/(4*f)
+            k &lt;- c(i,y)
+            df &lt;- rbind(df, k)
+    }
+    plot(df, ylim=c(0,25), xlab=&quot;Diameter, cm&quot;, ylab=&quot;Hight, cm&quot;)
+    ## Plotting focus
+    points(0, f, col = &quot;dark red&quot;, pch=10)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Evaluation example</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>D=50cm, f=10cm</li>
+</ul>
+
+<p><img src="figure/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Try it now!</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>App is pulished on shinyapps.io</li>
+<li>visit now: <a href="https://tony100500.shinyapps.io/parabolic2/">https://tony100500.shinyapps.io/parabolic2/</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Purpose'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Under the hood'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Evaluation example'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Try it now!'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
